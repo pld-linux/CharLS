@@ -2,7 +2,7 @@ Summary:	An optimized implementation of the JPEG-LS standard
 Summary(pl.UTF-8):	Zoptymalizowana implementacja standardu JPEG-LS
 Name:		CharLS
 Version:	1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 # to download, open this URL in fully JS-capable browser (elinks doesn't suffice)
