@@ -1,3 +1,4 @@
+# NOTE: for >= 2.0.0 (C++14 based) see DEVEL branch
 Summary:	An optimized implementation of the JPEG-LS standard
 Summary(pl.UTF-8):	Zoptymalizowana implementacja standardu JPEG-LS
 Name:		CharLS
