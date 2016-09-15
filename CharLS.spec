@@ -1,19 +1,14 @@
 Summary:	An optimized implementation of the JPEG-LS standard
 Summary(pl.UTF-8):	Zoptymalizowana implementacja standardu JPEG-LS
 Name:		CharLS
-Version:	1.0
-Release:	2
+Version:	1.1.0
+Release:	1
 License:	BSD
 Group:		Libraries
-# to download, open this URL in fully JS-capable browser (elinks doesn't suffice)
-# and manually accept BSD(!) license
-#Source0Download: http://charls.codeplex.com/releases/view/55406
-Source0:	%{name}-source-%{version}.zip
-# Source0-md5:	4694f02fbe2c4e1897ff2188d6e3cefc
-Patch0:		%{name}-add_cmake_install_target.patch
-Patch1:		%{name}-add_sharedlib_soname.patch
-Patch2:		%{name}-fix_tests.patch
-URL:		http://charls.codeplex.com/
+#Source0Download: https://github.com/team-charls/charls/releases
+Source0:	https://github.com/team-charls/charls/archive/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	ea02f65abd33aa46830dedec8f4c52f5
+URL:		https://github.com/team-charls/charls
 BuildRequires:	cmake >= 2.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	rpmbuild(macros) >= 1.566
@@ -47,18 +42,12 @@ Header files for CharLS library.
 Pliki nagłówkowe biblioteki CharLS.
 
 %prep
-%setup -q -c
-
-%undos CMakeLists.txt defaulttraits.h
-
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%setup -q -n charls-%{version}
 
 %build
 %cmake . \
-	-Dcharls_BUILD_SHARED_LIBS=ON \
 	-DBUILD_TESTING=ON
+
 %{__make}
 
 %install
@@ -75,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc License.txt
+%doc README.md src/License.txt
 %attr(755,root,root) %{_libdir}/libCharLS.so.*.*
 %attr(755,root,root) %ghost %{_libdir}/libCharLS.so.1
 
