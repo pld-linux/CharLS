@@ -3,7 +3,7 @@ Summary:	An optimized implementation of the JPEG-LS standard
 Summary(pl.UTF-8):	Zoptymalizowana implementacja standardu JPEG-LS
 Name:		CharLS
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/team-charls/charls/releases
@@ -56,6 +56,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# the most important header file is missing from make install...
+test ! -f $RPM_BUILD_ROOT%{_includedir}/CharLS/interface.h
+cp -p src/interface.h $RPM_BUILD_ROOT%{_includedir}/CharLS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
