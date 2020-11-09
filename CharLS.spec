@@ -1,17 +1,17 @@
-# TODO: C# library (as of 2.0.0, fails to build with mono)
+# TODO: C# library (as of 2.1.0, fails to build with mono)
 Summary:	An optimized implementation of the JPEG-LS standard
 Summary(pl.UTF-8):	Zoptymalizowana implementacja standardu JPEG-LS
 Name:		CharLS
-Version:	2.0.0
+Version:	2.1.0
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/team-charls/charls/releases
 Source0:	https://github.com/team-charls/charls/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	82aeca941af5339d414116b69cfc06d3
+# Source0-md5:	fe48dbafec2a6b3c6b3b32af823b4f07
 URL:		https://github.com/team-charls/charls
-BuildRequires:	cmake >= 2.6
-BuildRequires:	libstdc++-devel >= 6:4.9
+BuildRequires:	cmake >= 3.9
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	rpmbuild(macros) >= 1.566
 BuildRequires:	sed >= 4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -34,7 +34,7 @@ Summary:	Header files for CharLS library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki CharLS
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libstdc++-devel >= 6:4.9
+Requires:	libstdc++-devel >= 6:5
 
 %description devel
 Header files for CharLS library.
@@ -52,7 +52,7 @@ Pliki nagłówkowe biblioteki CharLS.
 %{__make}
 
 #if %{with dotnet}
-#cd net
+#cd dotnet/src
 #xbuild /property:Platform=x86 (or x64)
 
 %install
@@ -69,11 +69,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc License.txt README.md
-%attr(755,root,root) %{_libdir}/libCharLS.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/libCharLS.so.2
+%doc CHANGELOG.md LICENSE.md README.md SECURITY.md
+%attr(755,root,root) %{_libdir}/libcharls.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcharls.so.2
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libCharLS.so
-%{_includedir}/CharLS
+%attr(755,root,root) %{_libdir}/libcharls.so
+%{_includedir}/charls
