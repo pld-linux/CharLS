@@ -1,16 +1,16 @@
-# TODO: C# library (as of 2.1.0, fails to build with mono)
+# TODO: C# library from https://github.com/team-charls/charls-native-dotnet
 Summary:	An optimized implementation of the JPEG-LS standard
 Summary(pl.UTF-8):	Zoptymalizowana implementacja standardu JPEG-LS
 Name:		CharLS
-Version:	2.1.0
+Version:	2.4.1
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/team-charls/charls/releases
 Source0:	https://github.com/team-charls/charls/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	fe48dbafec2a6b3c6b3b32af823b4f07
+# Source0-md5:	0001ceaffc7feffd6919897d44a7e252
 URL:		https://github.com/team-charls/charls
-BuildRequires:	cmake >= 3.9
+BuildRequires:	cmake >= 3.13
 BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	rpmbuild(macros) >= 1.566
 BuildRequires:	sed >= 4.0
@@ -46,19 +46,15 @@ Pliki nagłówkowe biblioteki CharLS.
 %setup -q -n charls-%{version}
 
 %build
-%cmake . \
+%cmake -B build \
 	-DBUILD_TESTING=ON
 
-%{__make}
-
-#if %{with dotnet}
-#cd dotnet/src
-#xbuild /property:Platform=x86 (or x64)
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
@@ -77,3 +73,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcharls.so
 %{_includedir}/charls
+%{_pkgconfigdir}/charls.pc
+%{_libdir}/cmake/charls
